@@ -1,0 +1,189 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/static/demo/styles.css">
+</head>
+<body>
+<script src="/static/demo/script.js" type="text/javascript"></script>
+
+<script>
+    function setup_handlers() {
+        disableLinks([ ]);
+        //disableClickById("resource_creation_params__specialized");
+        forceFieldValue("resource_creation_params__suggested_name", "PeopleBase", "Resource name", false);
+        forceFieldValue("params__table_name", "Employees", "table_name", false);
+        forceFieldValue("params__db_connection_string", "jdbc:sqlite:/var/tmp/test.db", "db_connection_string", false);
+        forceFieldValue("params__jdbc_driver_class", "org.sqlite.JDBC", "jdbc_driver_class", false);
+        forceFieldValue("params__id_column", "ID", "id_column", false);
+        forceEmptyFieldValue("params__where1");
+        forceEmptyFieldValue("params__where2");
+        //forceFieldValue("params__default_search", "RESTx", "default_search", true);
+        //disableClickById("params__allow_updates_no");
+        disableClickById("params__allow_updates_yes");
+        disableClickById("params__name_value_pairs_no");
+        //disableClickById("params__name_value_pairs_yes");
+    }
+
+    setup_handlers();
+</script>
+
+<div id="menu_div" style="width:100%;text-align:center;border-bottom:1px dashed #444444;">&nbsp;</div>
+
+<table cellspacing=10 cellpadding=10>
+<tr>
+<td id="content_cell" valign=top style="border-right:1px dashed #444444;">
+    <h3>The form to create a new specialized component</h3>
+
+    <p>This looks exactly like the form to create a normal resource. But importantly,
+    we are going to set the 
+    <span onmouseover="rowHighlight('Make_this_a_specialized_component');" onmouseout="stopRowHighlight('Make_this_a_specialized_component');" class="lref">specialized flag</span>.
+    to indicate that this is going to be a specialized component. Go ahead, set the checkbox now...</p>
+
+    <h3>Setting the generic resource creation parameters</h3>
+
+    <p><i>Note: For this demo, we can pre-fill the form fields for you, if you like. Just press: 
+       <button style="font-size:0.9em;cursor:hand;" onClick="preFillForm();">pre-fill form</button></i></p>
+
+    <p>When we create a specialized component, we can
+    leave even mandatory fields empty (users still have to provide values for those when
+    they create their own resources based on our specialized component). However, even
+    for specialized components, we still need to provide a 
+    <span onmouseover="rowHighlight('Resource_name');" onmouseout="stopRowHighlight('Resource_name');" class="lref">resource name</span>. Please enter
+    "PeopleBase" in that field for our example. Let's also enter a useful
+    <span onmouseover="rowHighlight('Description');" onmouseout="stopRowHighlight('Description');" class="lref">description</span>. For example:
+    "A base component for our employee database.".</p>
+
+    <h3>Setting some of the specific DatabaseAccess component parameters</h3>
+
+    <p>Now we can set some of the more technical or security sensitive parameters. We by disallowing users
+    to make updates to the table, by clicking 'no' for
+    <span onmouseover="rowHighlight('allow_updates');" onmouseout="stopRowHighlight('allow_updates');" class="lref">allow_updates</span>.</p>
+
+    <p>Next we specify the DB connection string, which clearly is a security sensitive value. We don't want out
+    users to have to know this, so we specify it here ourselves. In the
+    <span onmouseover="rowHighlight('db_connection_string');" onmouseout="stopRowHighlight('db_connection_string');" class="lref">db_connection_string</span>
+    field please enter exactly: "jdbc:sqlite:/var/tmp/test.db".</p>
+
+    <p>Next we move on to the
+    <span onmouseover="rowHighlight('id_column');" onmouseout="stopRowHighlight('id_column');" class="lref">id_column</span>. Our database table uses the
+    column "ID" to hold its unique IDs. So, we here we enter "ID".</p>
+
+    <p>Since this particular database access component uses JDBC, we need to also specify the name of the JDBC driver class. Clearly, this is not the sort
+    of information that our end users would know.  We look for the
+    <span onmouseover="rowHighlight('jdbc_driver_class');" onmouseout="stopRowHighlight('jdbc_driver_class');" class="lref">jdbc_driver_class</span> field and
+    enter: "org.sqlite.JDBC".</p>
+
+    <p>To keep output nice and descriptive, we say 'yes' in the
+    <span onmouseover="rowHighlight('name_value_pairs');" onmouseout="stopRowHighlight('name_value_pairs');" class="lref">name_value_pairs</span> field.</p>
+
+    <p>Finally, we also specify the table on which the resource should operate. Find the
+    <span onmouseover="rowHighlight('table_name');" onmouseout="stopRowHighlight('table_name');" class="lref">table_name</span> field and
+    enter "Employees".</p>
+
+    <p>We now have entered all the fields that we want to pre-specify and thus prevent end users from overwriting in their own resources.
+    When we click the
+    <span onmouseover="elemHighlight('submit_button');" onmouseout="stopElemHighlight('submit_button');" class="lref">submit button</span>, the
+    new specialized component will be created.</p>
+
+</td>
+<td id="next_cell" valign=top width=350>
+    <h3>Next:</h3>
+    <p>You can either let us pre-fill the form for you:
+    <ol>
+       <li><button style="font-size:0.9em;cursor:hand;" onClick="preFillForm();">pre-fill form</button></li>
+       <li>Now press the <span onmouseover="elemHighlight('submit_button');" onmouseout="stopElemHighlight('submit_button');" class="lref">submit button</span>.</li>
+    </ol>
+    <p>Or you can perform the steps yourself:
+    <ol>
+        <li>Set the
+            <span onmouseover="rowHighlight('Make_this_a_specialized_component');" onmouseout="stopRowHighlight('Make_this_a_specialized_component');" class="lref">specialized flag</span>.</li>
+        <li>Enter &nbsp; <code>PeopleBase</code> &nbsp; in the
+            <span onmouseover="rowHighlight('Resource_name');" onmouseout="stopRowHighlight('Resource_name');" class="lref">resource name</span> field.</li>
+        <li>Enter &nbsp; <code>A base component for our employee database</code> &nbsp; in the
+            <span onmouseover="rowHighlight('Description');" onmouseout="stopRowHighlight('Description');" class="lref">description</span> field.</li>
+        <li>Select &nbsp; <code>no</code> &nbsp; in the
+            <span onmouseover="rowHighlight('allow_updates');" onmouseout="stopRowHighlight('allow_updates');" class="lref">allow_updates</span> field.</li>
+        <li>Enter &nbsp; <code>jdbc:sqlite:/var/tmp/test.db</code> &nbsp; in the
+            <span onmouseover="rowHighlight('db_connection_string');" onmouseout="stopRowHighlight('db_connection_string');" class="lref">db_connection_string</span> field.</li>
+        <li>Enter &nbsp; <code>ID</code> &nbsp; in the
+            <span onmouseover="rowHighlight('id_column');" onmouseout="stopRowHighlight('id_column');" class="lref">id_column</span> field.</li>
+        <li>Enter &nbsp; <code>org.sqlite.JDBC</code> &nbsp; in the
+            <span onmouseover="rowHighlight('jdbc_driver_class');" onmouseout="stopRowHighlight('jdbc_driver_class');" class="lref">jdbc_driver_class</span> field.</li>
+        <li>Select &nbsp; <code>yes</code> &nbsp; in the
+            <span onmouseover="rowHighlight('name_value_pairs');" onmouseout="stopRowHighlight('name_value_pairs');" class="lref">name_value_pairs</span> field.</li>
+        <li>Enter &nbsp; <code>Employees</code> &nbsp; in the
+            <span onmouseover="rowHighlight('table_name');" onmouseout="stopRowHighlight('table_name');" class="lref">table_name</span> field.</li>
+        <li>Press the 
+            <span onmouseover="elemHighlight('submit_button');" onmouseout="stopElemHighlight('submit_button');" class="lref">submit button</span>.</li>
+    </ol>
+</td>
+</tr>
+</table>
+</body>
+<script>
+
+makeMenu();
+
+function preFillForm()
+{
+    var form = getElemById("resource_form");
+    form.resource_creation_params__specialized.checked = true;
+    form.resource_creation_params__suggested_name.value = "PeopleBase";
+    form.resource_creation_params__desc.value = "A base component for our employee database";
+    form.params__allow_updates_yes.checked = false;
+    form.params__allow_updates_no.checked = true;
+    form.params__name_value_pairs_yes.checked = true;
+    form.params__name_value_pairs_no.checked = false;
+    form.params__columns.value = "";
+    form.params__db_connection_string.value = "jdbc:sqlite:/var/tmp/test.db";
+    form.params__id_column.value = "ID";
+    form.params__jdbc_driver_class.value = "org.sqlite.JDBC";
+    form.params__table_name.value = "Employees";
+    form.params__where1.value = "";
+    form.params__where2.value = "";
+}
+
+var interval;
+// Check whether an element has appeared in the frame, which
+// lets us know that the resource creation has succeeded.
+// If that's the case, we are completely updating the content
+// of the top frame.
+function createdChecker()
+{
+    if (getLinkByUrl("/specialized/PeopleBase") != null) {
+        clearInterval(interval);
+        // The left cell with descriptions...
+        elem = document.getElementById("content_cell");
+        elem.innerHTML = " \
+    <h3>A new specialized component has been created</h3>  \
+    <p>Here you see the confirmation that the specialized component was  \
+    <span onmouseover=\"elemHighlight('status_value');\" onmouseout=\"stopElemHighlight('status_value');\" class=\"lref\">created successfully</span>.  \
+    You also receive the confirmation of the \
+    <span onmouseover=\"elemHighlight('name_value');\" onmouseout=\"stopElemHighlight('name_value');\" class=\"lref\">resource name</span>.</p>  \
+  \
+    <p>Lastly, you get the  \
+    <span onmouseover=\"linkHighlight('/specialized/###');\" onmouseout=\"stopLinkHighlight('/specialized/###');\" class=\"lref\">URI of the new specialized component</span>  \
+    you just created. Accessing it provides you with information about how to create resources based on the specialized component.</p>  \
+";
+        // The right cell with the next steps...
+        elem = document.getElementById("next_cell");
+        elem.innerHTML = " \
+    <h3>Next:</h3> \
+    <p>Click on the  \
+    <span onmouseover=\"linkHighlight('/specialized/###');\" onmouseout=\"stopLinkHighlight('/specialized/###');\" class=\"lref\">URI of the specialized component</span>. \
+";
+
+    }
+    else {
+        // Need to redo these settings here, since the frame is reloaded in case of
+        // problem during form submit. In that case, all those handlers get erased.
+        // Thus, I need to reapply them regularly.
+        setup_handlers();
+    }
+}
+
+interval = setInterval(createdChecker, 500);
+
+</script>
+
+</html>
+

@@ -1,0 +1,51 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/static/demo/styles.css">
+</head>
+<body>
+<script src="/static/demo/script.js" type="text/javascript"></script>
+
+<script>
+    disableLinks([ "/resource/restx_search_results/search" ]);
+</script>
+
+<div id="menu_div" style="width:100%;text-align:center;border-bottom:1px dashed #444444;">&nbsp;</div>
+
+<table cellspacing=10 cellpadding=10>
+<tr>
+<td valign=top style="border-right:1px dashed #444444;">
+    <h3>A new RESTful resource, ready to use</h3>
+    <p>Just like RESTx showed us meta data about components, it also shows similar
+    information about a resource. At first glance this looks quite similar. However,
+    please notice that the parameters you provided during resource creation time are
+    not shown anymore. This makes perfect sense, since users of the new resource
+    do not have to concern themselves with the technical details of what's behind
+    that resource.</p>
+
+    <p>As before, you can see a 
+    <span onmouseover="rowHighlight('desc');" onmouseout="stopRowHighlight('desc');" class="lref">description</span> and the
+    <span onmouseover="rowHighlight('name');" onmouseout="stopRowHighlight('name');" class="lref">name</span> of the resource.
+    </p>
+
+    <p>Below that you can see the description of the available
+    <span onmouseover="rowHighlight('services');" onmouseout="stopRowHighlight('services');" class="lref">services</span> again, with
+    all the usual details, including description of input and output types as well as parameters. That way, a client has all the
+    information they need in order to use the services (or sub-resources) provided by this resouce.</p>
+
+    <p>Finally, as part of the service description, we get a
+    <span onmouseover="linkHighlight('/resource/restx_search_results/search');" onmouseout="stopLinkHighlight('/resource/restx_search_results/search');" class="lref">link</span>
+    which when clicked invokes the service method of the component, which implements this sub-resource.</p>
+    
+</td>
+<td valign=top width=350>
+    <h3>Next:</h3>
+    <p>Click on the 
+    <span onmouseover="linkHighlight('/resource/restx_search_results/search');" onmouseout="stopLinkHighlight('/resource/restx_search_results/search');" class="lref">link
+    for the search sub-resource</span>. Please note: This will trigger a Google search, so it may take a few seconds to see the results.</p>
+</td>
+</tr>
+</table>
+</body>
+<script>makeMenu();</script>
+</html>
+

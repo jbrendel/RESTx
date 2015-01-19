@@ -1,0 +1,7 @@
+ENABLED   = yes
+cname     = JsTwitterComponent
+import    = JavaScriptComponentWrapper
+lang      = javascript
+module    = org.mulesoft.restx.component.scripting
+path      = src/javascript/restx/components/TwitterComponent.js
+

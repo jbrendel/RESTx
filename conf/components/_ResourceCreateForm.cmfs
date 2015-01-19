@@ -1,0 +1,5 @@
+ENABLED = yes
+cname   = _ResourceCreateForm
+lang    = python
+module  = restx.components._ResourceCreateForm
+path    = src/python/restx/components/_ResourceCreateForm.py

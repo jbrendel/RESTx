@@ -1,0 +1,13 @@
+ENABLED   = yes
+
+# Name of the component class
+cname     = GsearchComponent
+
+# Language of the component implementation (all lowercase, fully spelled out: python, java)
+lang      = python
+
+# Module/package from which to import the component
+module    = restx.components.GsearchComponent
+
+# Path to the component's class file
+path      = src/python/restx/components/GsearchComponent.py

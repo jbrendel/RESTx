@@ -1,0 +1,59 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/static/demo/styles.css">
+</head>
+<body>
+<script src="/static/demo/script.js" type="text/javascript"></script>
+
+<script>
+    disableLinks([ "Home", "/code/GsearchComponent", "/code/DatabaseAccess" ])
+</script>
+
+<div id="menu_div" style="width:100%;text-align:center;border-bottom:1px dashed #444444;">&nbsp;</div>
+
+<table cellspacing=10 cellpadding=10>
+<tr>
+<td valign=top style="border-right:1px dashed #444444;">
+    <h3>List of available components</h3>
+    <p>Here you see the list of all the available components. For each component, a small
+    human-readable description is displayed, as well as a link to more information about that
+    particular component.</p>
+    
+    <h3>What is a component?</h3>
+    <p>A component is a piece of stand-alone software, which performs a very specific function, such
+    as accessing a database, a cloud service, a proprietary in-house API, etc. Components can also take
+    advantage of RESTx and implement even complex data integration logic in just a few lines
+    of code.</p>
+    
+    <p>Serious data integration work often requires custom code at some point. That is why RESTx
+    puts a lot of emphasis on making the writing of custom components as quick and easy as possible.
+    You even have a choice of languages for your own components: You can write them
+    either in <a href="http://restx.mulesoft.org/documented-java-component-example" target="_blank">Java</a>,
+    <a href="http://restx.mulesoft.org/documented-python-component-example" target="_blank">Python</a> or server-side
+    <a href="http://restx.mulesoft.org/documented-javascript-component-example" target="_blank">JavaScript</a>.</p>
+
+    <p>The component API is very small and easy to learn. RESTx comes with command line utilities that create a
+    ready-to-use component template in the language of your choice. You just need to fill in the blanks.
+    To see how easy it is to start writing your own components, 
+    <a href="http://restx.mulesoft.org/writing-your-own-components" target="_blank">click here</a> (opens in new window).</p>
+
+</td>
+<td valign=top>
+    <h3>Next:</h3>
+    <p>Let's take a look at two components in more detail. Follow these two examples in order:</p>
+    <ol>
+        <li>Click on the
+            <span onmouseover="linkHighlight('/code/GsearchComponent');" onmouseout="stopLinkHighlight('/code/GsearchComponent');" class="lref">/code/GsearchComponent</span>
+            link. The 'GsearchComponent' implements access to Google's search API. This illustrates creation of a basic resource from a component.</li>
+        <li>Click on the
+            <span onmouseover="linkHighlight('/code/DatabaseAccess');" onmouseout="stopLinkHighlight('/code/DatabaseAccess');" class="lref">/code/DatabaseAccess</span>
+            link. The 'DatabaseAccess' implements access to an SQL database. This illustrates the important concept of specialized components.</li>
+    </ol>
+</td>
+</tr>
+</table>
+</body>
+<script>makeMenu();</script>
+
+</html>
+

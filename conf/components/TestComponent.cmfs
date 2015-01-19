@@ -1,0 +1,14 @@
+ENABLED   = yes
+
+# Name of the component class
+cname     = TestComponent
+
+# Language of the component implementation (all lowercase, fully spelled out: python, java)
+lang      = java
+
+# Module/package from which to import the component
+module    = org.mulesoft.restx.component
+
+# Path to the component's class source (!) file  OR  the name of the component JAR file
+path      = src/java/org/mulesoft/restx/component/TestComponent.java
+

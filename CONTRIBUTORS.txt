@@ -1,0 +1,7 @@
+
+Juergen Brendel (juergen@brendel.com)
+    Idea, architecture, design, core code, examples, docs.
+
+David Dossot (david@dossot.net)
+    JavaScript client and docs.
+

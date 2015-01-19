@@ -1,0 +1,60 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/static/demo/styles.css">
+</head>
+<body>
+<script src="/static/demo/script.js" type="text/javascript"></script>
+
+<script>
+    disableLinks([ "[ Create resource ]", "/code/DatabaseAccess", "Home", "Code", "/code/DatabaseAccess/doc", "/resource/_createResourceForm/form/DatabaseAccess" ])
+</script>
+
+<div id="menu_div" style="width:100%;text-align:center;border-bottom:1px dashed #444444;">&nbsp;</div>
+
+<table cellspacing=10 cellpadding=10>
+<tr>
+<td valign=top style="border-right:1px dashed #444444;">
+    <h3>DatabaseAccess: A use case for specialized components</h3>
+    <p>The DatabaseAccess component implements access to an SQL database. To set up
+    database access, important, security sensitive or quite technical information needs
+    to be provided as configuration. For example, the database name, the JDBC driver
+    class or the connection string.</p>
+
+    <h3>Using specialized components to pre-configure and hide fields</h3>
+
+    <p>Often it is NOT desirable to share this information. At the same time, we want
+    to enable users of the system to create their own RESTful web services and resources
+    based on the database access we configure for them.</p>
+
+    <p>To facilitate this, RESTx uses the concept of "specialized components". In effect,
+    these are partially configured resources. For example, the IT staff could create
+    specialized component, based on the DatabaseAccess component: Only the DB connection string
+    and other critical information is provided. This is then stored as a new 'specialized
+    component'. Users then can create new resources based on this specialized component:
+    They still can configure their own fields and where clauses, but do not have the ability
+    to change the DB connection string or JDBC driver class.</p>
+
+    <p>Let's go through an example...</p>
+
+    <h3>The example</h3>
+
+    <p>Below you can see that the DatabaseAccess component requires or accepts a lot of
+    different parameters. Assume we are the IT staff and want to pre-configure some of the
+    critical fields for our users (while at the same time hiding these fields).</p>
+
+    <p>It starts out as usual, by clicking on the 
+    <span onmouseover="linkHighlight('[ Create resource ]');" onmouseout="stopLinkHighlight('[ Create resource ]');" class="lref">Create resource</span> link.</p>
+</td>
+<td valign=top>
+    <h3>Next:</h3>
+    <p>Let's create a specialized component, which pre-configures many important fields for
+    database access. To create a specialized component, we start by clicking on the
+    <span onmouseover="linkHighlight('[ Create resource ]');" onmouseout="stopLinkHighlight('[ Create resource ]');" class="lref">Create resource</span> link.</p>
+</td>
+</tr>
+</table>
+</body>
+<script>makeMenu();</script>
+
+</html>
+

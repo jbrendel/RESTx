@@ -1,0 +1,43 @@
+/*
+Copyright (c) 2010, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.com/yui/license.html
+version: 3.1.1
+build: 47
+*/
+body{font:13px/1.231 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}select,input,button,textarea{font:99% arial,helvetica,clean,sans-serif;}table{font-size:inherit;font:100%;}pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}/*
+Copyright (c) 2010, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.com/yui/license.html
+version: 3.1.1
+build: 47
+*/
+.yui3-cssfonts body,.yui3-cssfonts{font:13px/1.231 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}.yui3-cssfonts select,.yui3-cssfonts input,.yui3-cssfonts button,.yui3-cssfonts textarea{font:99% arial,helvetica,clean,sans-serif;}.yui3-cssfonts table{font-size:inherit;font:100%;}.yui3-cssfonts pre,.yui3-cssfonts code,.yui3-cssfonts kbd,.yui3-cssfonts samp,.yui3-cssfonts tt{font-family:monospace;*font-size:108%;line-height:100%;}/*
+Copyright (c) 2010, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.com/yui/license.html
+version: 3.1.1
+build: 47
+*/
+html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}/*
+Copyright (c) 2010, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.com/yui/license.html
+version: 3.1.1
+build: 47
+*/
+.yui3-cssreset html{color:#000;background:#FFF;}.yui3-cssreset body,.yui3-cssreset div,.yui3-cssreset dl,.yui3-cssreset dt,.yui3-cssreset dd,.yui3-cssreset ul,.yui3-cssreset ol,.yui3-cssreset li,.yui3-cssreset h1,.yui3-cssreset h2,.yui3-cssreset h3,.yui3-cssreset h4,.yui3-cssreset h5,.yui3-cssreset h6,.yui3-cssreset pre,.yui3-cssreset code,.yui3-cssreset form,.yui3-cssreset fieldset,.yui3-cssreset legend,.yui3-cssreset input,.yui3-cssreset textarea,.yui3-cssreset p,.yui3-cssreset blockquote,.yui3-cssreset th,.yui3-cssreset td{margin:0;padding:0;}.yui3-cssreset table{border-collapse:collapse;border-spacing:0;}.yui3-cssreset fieldset,.yui3-cssreset img{border:0;}.yui3-cssreset address,.yui3-cssreset caption,.yui3-cssreset cite,.yui3-cssreset code,.yui3-cssreset dfn,.yui3-cssreset em,.yui3-cssreset strong,.yui3-cssreset th,.yui3-cssreset var{font-style:normal;font-weight:normal;}.yui3-cssreset li{list-style:none;}.yui3-cssreset caption,.yui3-cssreset th{text-align:left;}.yui3-cssreset h1,.yui3-cssreset h2,.yui3-cssreset h3,.yui3-cssreset h4,.yui3-cssreset h5,.yui3-cssreset h6{font-size:100%;font-weight:normal;}.yui3-cssreset q:before,.yui3-cssreset q:after{content:'';}.yui3-cssreset abbr,.yui3-cssreset acronym{border:0;font-variant:normal;}.yui3-cssreset sup{vertical-align:text-top;}.yui3-cssreset sub{vertical-align:text-bottom;}.yui3-cssreset input,.yui3-cssreset textarea,.yui3-cssreset select{font-family:inherit;font-size:inherit;font-weight:inherit;}.yui3-cssreset input,.yui3-cssreset textarea,.yui3-cssreset select{*font-size:100%;}.yui3-cssreset legend{color:#000;}/*
+Copyright (c) 2010, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.com/yui/license.html
+version: 3.1.1
+build: 47
+*/
+.yui3-cssbase h1{font-size:138.5%;}.yui3-cssbase h2{font-size:123.1%;}.yui3-cssbase h3{font-size:108%;}.yui3-cssbase h1,.yui3-cssbase h2,.yui3-cssbase h3{margin:1em 0;}.yui3-cssbase h1,.yui3-cssbase h2,.yui3-cssbase h3,.yui3-cssbase h4,.yui3-cssbase h5,.yui3-cssbase h6,.yui3-cssbase strong{font-weight:bold;}.yui3-cssbase abbr,.yui3-cssbase acronym{border-bottom:1px dotted #000;cursor:help;}.yui3-cssbase em{font-style:italic;}.yui3-cssbase blockquote,.yui3-cssbase ul,.yui3-cssbase ol,.yui3-cssbase dl{margin:1em;}.yui3-cssbase ol,.yui3-cssbase ul,.yui3-cssbase dl{margin-left:2em;}.yui3-cssbase ol li{list-style:decimal outside;}.yui3-cssbase ul li{list-style:disc outside;}.yui3-cssbase dl dd{margin-left:1em;}.yui3-cssbase th,.yui3-cssbase td{border:1px solid #000;padding:.5em;}.yui3-cssbase th{font-weight:bold;text-align:center;}.yui3-cssbase caption{margin-bottom:.5em;text-align:center;}.yui3-cssbase p,.yui3-cssbase fieldset,.yui3-cssbase table,.yui3-cssbase pre{margin-bottom:1em;}.yui3-cssbase input[type=text],.yui3-cssbase input[type=password],.yui3-cssbase textarea{width:12.25em;*width:11.9em;}/*
+Copyright (c) 2010, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.com/yui/license.html
+version: 3.1.1
+build: 47
+*/
+h1{font-size:138.5%;}h2{font-size:123.1%;}h3{font-size:108%;}h1,h2,h3{margin:1em 0;}h1,h2,h3,h4,h5,h6,strong{font-weight:bold;}abbr,acronym{border-bottom:1px dotted #000;cursor:help;}em{font-style:italic;}blockquote,ul,ol,dl{margin:1em;}ol,ul,dl{margin-left:2em;}ol li{list-style:decimal outside;}ul li{list-style:disc outside;}dl dd{margin-left:1em;}th,td{border:1px solid #000;padding:.5em;}th{font-weight:bold;text-align:center;}caption{margin-bottom:.5em;text-align:center;}p,fieldset,table,pre{margin-bottom:1em;}input[type=text],input[type=password],textarea{width:12.25em;*width:11.9em;}

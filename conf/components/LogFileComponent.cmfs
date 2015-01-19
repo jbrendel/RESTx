@@ -1,0 +1,5 @@
+ENABLED = no
+cname   = LogFileComponent
+lang    = python
+module  = restx.components.LogFileComponent
+path    = src/python/restx/components/LogFileComponent.py

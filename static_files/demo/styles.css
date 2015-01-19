@@ -1,0 +1,26 @@
+body {
+    background-color:#eeeeee;
+}
+
+p, li {
+    font-size:0.9em;
+}
+
+h1 {
+    font-size:1.2em;
+}
+
+h2 {
+    font-size:1.1em;
+}
+
+h3 {
+    font-size:1.0em;
+}
+
+span.lref {
+    padding:2px;
+    font-size:1.1em;
+    background-color:#cccccc;
+    color:#000099;
+}

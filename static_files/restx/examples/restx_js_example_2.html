@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>RESTx Tester 2</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/restx/theme/combo.css" type="text/css">
+    <script src="/static/restx/scripts/jquery-1.4.2.min.js"></script>
+    <script src="/static/restx/scripts/restx_plugin.js"></script>
+    <script src="/static/restx/scripts/restx_js_client_example.js"></script>
+</head>
+<body>
+<h2>Creating and using new resources (interdependent calls)</h2>
+<h3><a href="restx_js_example_1.html">See RESTx basic usage</a></h3>
+<ul>
+  <li>ProxyPath value:&nbsp;/<input type="text" id="proxypath" />/&nbsp;<button id="proxysetter">Apply</button> &nbsp (Enter a wrong value here to test the error handling)</li>
+</ul>
+<ul>
+  <li>Step 1. Show all components (restx.getAllComponentNames)</li>
+  <li><a href="#" id="step1">Execute Step 1</a><div id="componentsList"></div></li>
+</ul>
+<ul>
+  <li>Step 2. Select one of the available components (restx.getComponentDetails)</li>
+  <li><select id="step2"></select></li>
+</ul>
+<ul>
+  <li>Step 3. Get the selected component's details and build an html form with this info</li>
+  <li><a href="#" id="step3">Execute Step 3</a></li>
+</ul>
+<ul>
+  <li>Step 4. Fill out the form and submit it</li>
+  <li>
+    <div id="resourceform">The form will be dynamically generated here ...</div>
+  </li>
+</ul>
+<ul>
+  <li>Step 5. Intercept the submit event and post a modified http request to this component's URI (restx.createResource)</li>
+  <li><span>Message load: </span><span id="messageload"></span></li>
+</ul>
+<ul>
+  <li>Step 6. Show the details of the created resource (restx.getResourceDetails)</li>
+  <li id="newresource"></li>
+</ul>
+<ul>
+  <li>Step 7. Select a service of the created resource</li>
+  <li><select id="step7"></select></li>
+</ul>
+<ul>
+  <li>Step 8. Call this service of the current resource on this RESTx server (restx.callService)</li>
+  <li><a href="#" id="step8">Execute Step 8</a></li>
+</ul>
+<div id="result"></div>
+
+</body>
+</html>

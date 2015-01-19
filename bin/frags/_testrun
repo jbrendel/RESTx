@@ -1,0 +1,39 @@
+
+#
+# Runs test cases
+#
+
+echo "============================================="
+echo "=== Running test cases."
+echo "===     Use --help to see available options."
+echo "============================================="
+
+if [ "$1" == "--help" ]; then
+    echo
+    echo "If run without options, this finds all test_*.py files"
+    echo "and calls the runtest() method from those files."
+    echo
+    echo "You can specify a particular test file name on the"
+    echo "command line as parameter to this script. In that case,"
+    echo "only that one test file will be run."
+    echo
+    exit 0
+fi
+
+cd $RESTX_HOME/src/python/
+
+JYTHONPATH=$RESTX_HOME/src/python
+export JYTHONPATH
+
+if [ ! -z "$1" ]; then
+    echo "=== Running a single test file:  " $1
+    echo "============================================="
+    $JYTHON_HOME/bin/jython restx/testtools/runner.py $1
+else
+    echo "=== Running all test files I can find."
+    echo "============================================="
+    $JYTHON_HOME/bin/jython restx/testtools/runner.py `find . -name 'test_*.py'`
+
+fi
+
+

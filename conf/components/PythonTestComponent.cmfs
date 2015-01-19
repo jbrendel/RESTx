@@ -1,0 +1,5 @@
+ENABLED   = yes
+cname   = PythonTestComponent
+lang    = python
+module  = restx.components.PythonTestComponent
+path    = src/python/restx/components/PythonTestComponent.py

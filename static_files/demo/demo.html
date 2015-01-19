@@ -1,0 +1,68 @@
+<html>
+<head>
+<script language="JavaScript"><!--
+var lastUrl = '';
+
+function oc(a)
+{
+  var o = {};
+  for(var i=0;i<a.length;i++) {
+    o[a[i]]='';
+  }
+  return o;
+}
+
+var known_urls_list = [ "/", "/code", "/resource", "/meta/doc",
+                        "/code/GsearchComponent", "/code/GsearchComponent/doc",
+                        "/code/DatabaseAccess", "/code/DatabaseAccess/doc",
+                        "/specialized/PeopleBase",
+                        "/resource/_createResourceForm/form/GsearchComponent",
+                        "/resource/_createResourceForm/form/PeopleBase_specialized_y",
+                        "/resource/_createResourceForm/form/DatabaseAccess",
+                        "/resource/restx_search_results",
+                        "/resource/restx_search_results/search",
+                        "/resource/YoungEmployees",
+                        "/resource/YoungEmployees/entries" ]
+var known_urls      = oc(known_urls_list)
+
+function processChange(url) {
+    url = url.substring(10);
+    url = url.substring(url.indexOf("/"));
+    // Remove special characters that might be used when there are query parameters
+    url = url.replace("?", "_");
+    url = url.replace("=", "_");
+    if (!(url in known_urls)) {
+        url = "/unknown";
+    }
+    if (url == "/") {
+        url = "/static/demo/demo_texts/root.html";
+    }
+    else {
+        url = "/static/demo/demo_texts" + url + ".html";
+    }
+    window.frame0.location.href = url;
+}
+
+function monitor() {
+    if (lastUrl != window.frame2.location.href) {
+        lastUrl = window.frame2.location.href;
+        window.frame1.document.getElementById("url").innerHTML = lastUrl;
+        processChange(lastUrl);
+    }
+    setTimeout('monitor()',250);
+}
+
+function startToMonitor() {
+    lastUrl = window.frame2.location.href;
+    window.frame1.document.getElementById("url").innerHTML = lastUrl;
+    setTimeout('monitor()',250);
+}
+//--></script>
+</head>
+
+<frameset border=3 framespacing=0 rows="30%,4%,*" onLoad="startToMonitor()">
+<frame src="/static/demo/demo_texts/root.html" name="frame0">
+<frame src="/static/demo/demo_texts/url.html" name="frame1" noresize>
+<frame src="/" name="frame2">
+</frameset>
+</html>

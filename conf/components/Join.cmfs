@@ -1,0 +1,5 @@
+ENABLED = yes
+cname   = Join
+lang    = python
+module  = restx.components.Join
+path    = src/python/restx/components/Join.py

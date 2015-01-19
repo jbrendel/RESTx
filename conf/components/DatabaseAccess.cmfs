@@ -1,0 +1,5 @@
+ENABLED   = yes
+cname   = DatabaseAccess
+lang    = python
+module  = restx.components.DatabaseAccess
+path    = src/python/restx/components/DatabaseAccess.py

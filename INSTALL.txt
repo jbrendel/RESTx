@@ -1,0 +1,20 @@
+
+Linux/Unix
+----------
+To install RESTx, please run this command:
+
+    % ./install.sh
+
+You do not need to be root, since the install
+happens in this local directory.
+
+After the install is completed, instructions
+on how to run the RESTx server are printed.
+
+
+Windows
+-------
+For Windows installation instructions, please see:
+
+    http://restx.mulesoft.org/installing-and-running-windows
+

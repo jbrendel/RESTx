@@ -1,0 +1,422 @@
+
+
+#
+# Body of the restxctl script
+#
+# This script is used to start, stop or restart a RESTx server.
+# You can also use it to compile components and to create new
+# component templates for the various languages.
+#
+
+COMP_CONF_DIR=conf/components
+COMP_CONF_EXT=.cmfs
+RESOURCE_DB=resourceDB
+CODE_PREFIX=code
+
+LANGUAGES=
+
+function restx_help
+{
+    echo -e "
+Welcome to RESTx. (c) 2010 MuleSoft.
+Version: $VERSION
+"
+    if [ -n "$1" ]; then
+        echo -e "Error: Illegal option: $1\n"
+    else
+        echo -e "This is the '$CTL_SCRIPT_NAME' script, with which you can start, stop
+or restart a RESTx server. You can also 
+"
+    fi
+    echo -e   "Usage: $CTL_SCRIPT_NAME [start|restart] [-b] [-l <logfile>]"
+    echo      "             To start or restart the RESTx server process."
+    echo      "             Use -b option to start in background."
+    echo      "             Use -l <logfile> to direct output to specified logfile instead of the console."
+    echo -e "\n   or: $CTL_SCRIPT_NAME stop"
+    echo      "             To stop a currently running server process."
+    echo -e "\n   or: $CTL_SCRIPT_NAME component compile [<component_folder>]"
+    echo      "             To compile Java components. Only needed when Java components are added or modified."
+    echo      "             If specified without options, this command compiles all the standard Java components that"
+    echo      "             come with a RESTx distribution or are located in the default directory for Java components."
+    echo      "             If your components are located in other directories, please specify the path to the root"
+    echo      "             directory of your component package."
+    echo -e "\n   or: $CTL_SCRIPT_NAME component create <component_name> <language> [<target_directory> <module_or_package>]"
+    echo      "             To create a new component template."
+    echo      "             By default, the new component is created in the standard target directory that RESTx"
+    echo      "             uses for components of this language and the package/module is the standard one used by"
+    echo      "             RESTx for these components. However, if you are developing your components in a custom"
+    echo      "             location and/or package, please specify the target directory and full package/module"
+    echo      "             name as the two additional parameters."
+    echo -e "\n   or: $CTL_SCRIPT_NAME component list"
+    echo      "             To list all known components, their language, module and enabled/disabled status."
+    echo -e "\n   or: $CTL_SCRIPT_NAME component enable|disable <component_name>"
+    echo      "             Enable or disable a component without removing. Server restart required."
+    echo -e "\n   or: $CTL_SCRIPT_NAME component delete <component_name>"
+    echo      "             Deletes a component and all related files (manifest and all resources based on it)."
+    echo -e "\n   or: $CTL_SCRIPT_NAME component resources <component_name>"
+    echo      "             List all resources, which are based on this component, either directly or indirectly."
+    echo -e "\n   or: $CTL_SCRIPT_NAME help"
+    echo      "             To show this help information."
+    echo
+}
+
+function start_restx
+{
+    in_background=""
+    # Default logfile (if running in foreground): None, output to console
+    logfile=
+    shift
+    while (( "$#" )); do
+        if [ $1 == "-b" ]; then
+            in_background="--background"
+            if [ -z $logfile ]; then
+                # If logfile has not been set already then we set a default logfile location
+                logfile="--logfile "$RESTX_HOME/restx.log
+            fi
+        elif [ $1 == "-l" ]; then
+            logfile="--logfile "$2
+            shift
+        else
+            restx_help "start parameter '$1'"
+            exit 1
+        fi
+        shift
+    done
+
+    cd $RESTX_HOME/src/python
+    $START_STOP_DAEMON --start $in_background --pidfile $PID_FILE --startas $JYTHON_EXECUTABLE -- $RESTX_HOME/src/python/starter.py --pidfile $PID_FILE $logfile --rootdir $RESTX_HOME
+    if [ $? == 0 ]; then
+        sleep 4
+    else
+        exit 1 
+    fi
+}
+
+function stop_restx
+{
+    $START_STOP_DAEMON --stop --pidfile $PID_FILE &> /dev/null
+    if [ $? == 0 ]; then
+        echo "Server stopped."
+        return 0
+    else
+        echo "Could not stop server, or no server was running."
+        return 1
+    fi
+}
+
+function restart_restx
+{
+    echo "Stopping RESTx server. Please wait."
+    stop_restx
+    if [ $? == 0 ]; then
+        sleep 2
+    fi
+    echo "Starting RESTx server. Please wait."
+    start_restx $@
+    if [ $? == 0 ]; then
+        echo "Restart successful."
+        exit 0
+    else
+        exit 1
+    fi
+}
+
+function compile_components
+{
+    optional_path="$1"
+    echo "Compiling RESTx Java components. Please wait..."
+    $COMPILE_SCRIPT components "$optional_path"
+    exit $?
+}
+
+function print_known_languages
+{
+    curdir=`pwd`
+    cd $RESTX_HOME/languages
+    find * -maxdepth 0 -type d
+    cd $curdir
+}
+
+function create_component
+{
+    name="$1"
+    language="$2"
+    target="$3"
+    module="$4"
+
+    # Check that we have all the parameters we need
+    if [ -z $name  -o  -z $language ]; then
+        echo "When creating a component, you need to specify a name and a target language."
+        exit 1
+    fi
+
+    # Check whether we know the language
+    if [ ! -d "$RESTX_HOME/languages/$language" ]; then
+        echo "RESTx does not know the specified language '$language'. Only these languages are known:"
+        print_known_languages
+        exit 1
+    fi
+
+    # Check that we have all the parameters we need
+    if [[ "$target" != "" ]]; then
+        if [[ "$module" == "" ]]; then
+            echo "When specifying a custom target directory you also must specify the module."
+            exit 1
+        fi
+        if [[ ! -d "$target" ]]; then
+            echo "Specified target directory '$target' does not exist..."
+            exit 1
+        fi
+    fi
+
+    # Check if we have a component with the suggested name already
+    conf_file="$RESTX_HOME/$COMP_CONF_DIR/$name$COMP_CONF_EXT"
+    if [ -f "$conf_file" ]; then
+        echo "A component with name '$name' exists already."
+        exit 1
+    fi
+
+    # Start creating the config file
+    echo "ENABLED = yes" > $conf_file
+    echo "cname   = $name" >> $conf_file
+    echo "lang    = $language" >> $conf_file
+
+
+    # Call the language specific placement script
+    $RESTX_HOME/languages/$language/util/placement $1 $RESTX_HOME "$conf_file" "$target" "$module"
+    if [ $? == 0 ]; then
+        exit 0
+    else
+        echo "Creation of new component failed..."
+        rm $conf_file
+        exit 1
+    fi
+}
+
+function print_component_info
+{
+    fname="$1"
+    awk '\
+    BEGIN { enabled=""; cname=""; lang=""; module="";} \
+    { \
+        if ($1 == "ENABLED") { enabled=$3 } \
+        else if ($1 == "cname") { cname=$3 } \
+        else if ($1 == "lang")  { lang=$3 } \
+        else if ($1 == "module") { module=$3 }\
+    }\
+    END { printf("%-30s    %-3s       %-10s   %s\n", cname, enabled, lang, module); }' $fname
+}
+
+function list_components
+{
+    echo "Component name                    Enabled   Language     Module"
+    echo "---------------------------------------------------------------------------------------------"
+    for f in $RESTX_HOME/$COMP_CONF_DIR/*$COMP_CONF_EXT
+    do
+        print_component_info $f
+    done
+}
+
+function enable_disable_component
+{
+    name="$1"
+    yesno="$2"
+    if [ "$yesno" == "yes" ]; then
+        word=enable
+    else
+        word=disable
+    fi
+    conf_file="$RESTX_HOME/$COMP_CONF_DIR/$name$COMP_CONF_EXT"
+    tmp_conf_file="$conf_file".tmp
+    if [ -f "$conf_file" ]; then
+        echo "ENABLED   = $yesno" > "$tmp_conf_file"
+        egrep -v "^ENABLED" "$conf_file" >> "$tmp_conf_file"
+        echo "Component '$name' ""$word""d. Restart the server to finalize..."
+        mv "$tmp_conf_file" "$conf_file"
+        exit 0
+    else
+        echo "Unknown component '$name'. Cannot $word..."
+        exit 1
+    fi
+}
+
+function enable_component
+{
+    name="$1"
+    enable_disable_component $name yes
+}
+
+
+function disable_component
+{
+    name="$1"
+    enable_disable_component $name no
+}
+
+function bullet_print
+{
+    # Print contents of a file with a defined prefix
+    fname="$1"
+    prefix="$2"
+    cat "$fname" | sed s/^/"$prefix"/
+}
+
+function myrmfile
+{
+    echo "   " $1
+    rm $1
+}
+
+function find_resources_for_component
+{
+    # If 'delete' is specified as second parameter then we will
+    # just quietly delete all the resource files we find.
+    comp_name="$1"
+    resource_dir="$RESTX_HOME/$RESOURCE_DB"
+    prefix="\ \ \ \ +\ "
+    delete="$2"
+    prxr_offset_len="4"
+    rxr_offset_len="3"
+
+    # First we find all the specialized component resources that use this component
+    # We write the result into a temp file, so that we can refer back to it when we
+    # look for resources based on those specialized component resources.
+    if [ "$delete" != "delete" ]; then 
+        echo "Specialized component resources based on component $comp_name..."
+    fi
+    cd "$RESTX_HOME/$RESOURCE_DB/"
+    tmp_file=__base_resource_$$.tmp
+    egrep -l -s "\"code_uri\": *\"/code/$comp_name"  *.prxr | awk '{ print substr($1, 0, length($1)-4); }' > $tmp_file
+    if [ "$delete" != "delete" ]; then 
+        # Print mode
+        bullet_print $tmp_file "$prefix"
+    fi
+
+    # Now look for resources that are based on those specialized component resources,
+    # but only there were any.
+    if [ -s "$tmp_file" ]; then    # Check whether this file contains some data
+        if [ "$delete" != "delete" ]; then 
+            # Print mode
+            echo "Resources based on these specialized component resources for $comp_name..."
+        fi
+        # Collecting list of files
+        for name in $(cat $tmp_file); do
+            egrep -l -s "\"extends\": *\"$name"  *.rxr | awk '{ print substr($1, 0, length($1)-3); }' >> "$tmp_file"_2
+        done
+        if [ -s "$tmp_file"_2 ]; then
+            if [ "$delete" != "delete" ]; then
+                # Print mode
+                bullet_print "$tmp_file"_2 "$prefix"
+            else
+                # Delete mode
+                for name in $(cat "$tmp_file"_2); do
+                    myrmfile "$name".rxr
+                done
+            fi
+        else
+            if [ "$delete" != "delete" ]; then 
+                echo "    *** None found"
+            fi
+        fi
+        if [ "$delete" == "delete" ]; then
+            if [ -s "$tmp_file" ]; then
+                for name in $(cat $tmp_file); do
+                    myrmfile "$name".prxr
+                done
+            fi
+        fi
+        rm "$tmp_file"_2
+    else
+        if [ "$delete" != "delete" ]; then
+            echo "    *** None found"   # That's the 'none found' message for the specialized component resources
+        fi
+    fi
+
+    # Now the 'normal' resources, which are referring to the component directly
+    if [ "$delete" != "delete" ]; then 
+        # Print mode
+        echo "Normal resources based on component $comp_name..."
+    fi
+    egrep -l -s "\"code_uri\": *\"/code/$comp_name"  *.rxr | awk '{ print substr($1, 0, length($1)-3); }' > $tmp_file
+    if [ -s "$tmp_file" ]; then    # Check whether this file contains some data
+        if [ "$delete" != "delete" ]; then 
+            bullet_print $tmp_file "$prefix"
+        else
+            for name in $(cat $tmp_file); do
+                myrmfile "$name".rxr
+            done
+        fi
+    else
+        if [ "$delete" != "delete" ]; then 
+            echo "    *** None found"
+        fi
+    fi
+
+    rm $tmp_file
+}
+
+function delete_component
+{
+    comp_name="$1"
+    resource_dir="$RESTX_HOME/$RESOURCE_DB"
+    conf_file="$RESTX_HOME/$COMP_CONF_DIR/$comp_name$COMP_CONF_EXT"
+
+    if [ -f "$conf_file" ]; then
+        echo "****"
+        echo "**** WARNING!"
+        echo "****"
+        echo "**** About to delete component '$comp_name'"
+        echo "****"
+        echo "**** About to delete component manifest file."
+        srcfile=`egrep -s "path" $conf_file | awk '{ print $3 }'`
+        if [ ! -z "$srcfile" ]; then
+            echo "**** About to delete component source file: "$srcfile
+        fi
+        echo "**** About to delete all resources based on this component:"
+        find_resources_for_component $comp_name
+
+        read -p "Are you sure you want to permanently delete all these files? (yes/no): " ui
+        if [ "$ui" == "yes" ]; then
+            echo
+            echo "**** Ok. Deleting all files related to this component..."
+            if [[ $srcfile == /* ]]; then
+                # It's an absolute filename
+                prefix=""
+            else
+                prefix=$RESTX_HOME
+            fi
+            myrmfile "$prefix/$srcfile"
+            find_resources_for_component $comp_name delete
+            myrmfile "$conf_file"
+            echo "All files related to the component have been deleted. Please restart the server."
+        else
+            echo "You did not enter 'yes'. Nothing was deleted..."
+        fi
+
+    else
+        echo "Unknown component '$comp_name'..."
+        exit 1
+    fi
+}
+
+
+case $1 in
+    start)     start_restx $@;;
+    stop)      stop_restx;;
+    restart)   restart_restx $@;;
+    help)      restx_help;;
+    component) case $2 in
+                 compile)   compile_components $3;;
+                 create)    create_component $3 $4 $5 $6;;
+                 list)      list_components;;
+                 enable)    enable_component $3;;
+                 disable)   disable_component $3;;
+                 resources) find_resources_for_component $3;;
+                 delete)    delete_component $3;;
+                 *)         restx_help "'component' parameter '$2'";;
+               esac;;
+    *)         restx_help $1;;
+esac
+
+exit $?
+

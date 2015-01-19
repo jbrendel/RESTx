@@ -1,0 +1,5 @@
+ENABLED = yes
+cname   = StorageComponent
+lang    = python
+module  = restx.components.StorageComponent
+path    = src/python/restx/components/StorageComponent.py

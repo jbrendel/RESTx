@@ -1,0 +1,5 @@
+ENABLED = no
+cname   = WeatherScraper
+lang    = python
+module  = restx.components.WeatherScraper
+path    = src/python/restx/components/WeatherScraper.py

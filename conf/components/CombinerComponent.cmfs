@@ -1,0 +1,5 @@
+ENABLED = yes
+cname   = CombinerComponent
+lang    = python
+module  = restx.components.CombinerComponent
+path    = src/python/restx/components/CombinerComponent.py

@@ -1,0 +1,5 @@
+ENABLED = yes
+cname   = Failover
+lang    = python
+module  = restx.components.Failover
+path    = src/python/restx/components/Failover.py

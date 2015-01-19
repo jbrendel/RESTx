@@ -1,0 +1,37 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/static/demo/styles.css">
+</head>
+<body>
+<script src="/static/demo/script.js" type="text/javascript"></script>
+
+<script>
+    disableLinks([ "/resource/YoungEmployees/entries" ]);
+</script>
+
+<div id="menu_div" style="width:100%;text-align:center;border-bottom:1px dashed #444444;">&nbsp;</div>
+
+<table cellspacing=10 cellpadding=10>
+<tr>
+<td valign=top style="border-right:1px dashed #444444;">
+    <h3>A new RESTful resource, based on a specialized component</h3>
+    <p>Here now the information about the new resource. It is based on a
+    specialized component, but for the user it looks just like any other resource.</p>
+
+    <p>Click on the
+    <span onmouseover="linkHighlight('/resource/YoungEmployees/entries');" onmouseout="stopLinkHighlight('/resource/YoungEmployees/entries');" class="lref">sub-resource link</span>
+    which will give us the list of young employees.</p>
+    
+</td>
+<td valign=top width=350>
+    <h3>Next:</h3>
+    <p>Click on the 
+    <span onmouseover="linkHighlight('/resource/YoungEmployees/entries');" onmouseout="stopLinkHighlight('/resource/YoungEmployees/entries');" class="lref">sub-resource link</span>.
+</td>
+</tr>
+</table>
+</body>
+<script>makeMenu();</script>
+
+</html>
+

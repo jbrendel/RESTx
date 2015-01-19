@@ -1,0 +1,55 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/static/demo/styles.css">
+</head>
+<body>
+<script src="/static/demo/script.js" type="text/javascript"></script>
+
+<script>
+    disableLinks([ "/resource", "/code", "/meta/doc" ]);
+</script>
+
+<div id="menu_div" style="width:100%;text-align:center;border-bottom:1px dashed #444444;">&nbsp;</div>
+
+<table cellspacing=10 cellpadding=10>
+<tr>
+<td valign=top style="border-right:1px dashed #444444;">
+    <h2>Welcome to the RESTx demo: The server's home page</h2>
+    <h3>RESTful API</h3>
+    <p>RESTx provides a fully RESTful API. Everything the server has to offer can
+    be explored simply by following links. The server's root URI is the only URI a client
+    needs to know. Since we just accessed the root URI you can see links
+    to other parts of the RESTx server, which we will explore shortly. 
+    To find out more about RESTx's RESTful API, please
+    <a href="http://restx.mulesoft.org/restful-server-api" target="_blank">click here</a> (opens in new window).</p>
+
+    <h3>Content negotiation</h3>
+    <p>RESTx supports content negotiation: The same information can be returned in
+    different representations, depending on the client's preferences. Right now, RESTx has recognized
+    that it is accessed via browser, this all information is rendered in useful HTML.</p>
+
+    <p>However, if you specify <code>Accept: application/json</code> as one of
+    the HTTP request headers you see the same information rendered in plain
+    JSON. To see and example of this, please
+    <a href="http://restx.mulesoft.org/restful-server-api" target="_blank">click here</a> (opens in new window).</p>
+</td>
+<td valign=top>
+    <h3>Next:</h3>
+    <p>Do these two steps in order:</p>
+    <ol>
+        <li>See what happens if you follow one of those links. For example, you could take a look at the server's
+            built-in documentation. To do so, in the frame below click on the link labelled
+            <span onmouseover="linkHighlight('/meta/doc');" onmouseout="stopLinkHighlight('/meta/doc');" class="lref">/meta/doc</span>
+            (hover here to have that link highlighted).</li>
+        <li>Let us now take a look at the components, which are currently installed in this RESTx server.
+            In the frame below, please click on the link labelled <span onmouseover="linkHighlight('/code');" onmouseout="stopLinkHighlight('/code');" class="lref">/code</span>
+            (hover here to have that link highlighted).</li>
+    </ol>
+</td>
+</tr>
+</table>
+</body>
+<script>makeMenu();</script>
+
+</html>
+

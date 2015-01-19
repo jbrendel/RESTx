@@ -1,0 +1,5 @@
+ENABLED = no
+cname   = TimeRange
+lang    = python
+module  = restx.components.TimeRange
+path    = src/python/restx/components/TimeRange.py

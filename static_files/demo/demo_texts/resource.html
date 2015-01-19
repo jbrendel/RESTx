@@ -1,0 +1,55 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/static/demo/styles.css">
+</head>
+<body>
+<script src="/static/demo/script.js" type="text/javascript"></script>
+
+<script>
+    disableLinks([ "Home" ])
+</script>
+
+<div id="menu_div" style="width:100%;text-align:center;border-bottom:1px dashed #444444;">&nbsp;</div>
+
+<table cellspacing=10 cellpadding=10>
+<tr>
+<td valign=top style="border-right:1px dashed #444444;">
+    <h3>List of available resources</h3>
+    <p>Here you see the list of all currently available resources. A
+    human-readable description is displayed, as well as a link to more information about that
+    particular resource.</p>
+    
+    <h3>What is a resource?</h3>
+    <p>A resource is a something that can be directly used, without requiring any
+    further knowledge. Usually, it provides a link that can just be clicked on to get some
+    data. Often, it is also possible to perform updates to the underlying data, using nothing
+    but ordinary web requests to send the information.</p>
+
+    <p>A resource is created by providing a set of parameters for the components, which are
+    specialized, generic pieces of code living in the RESTx server, which implement
+    a very specific function, such as accessing a database, a cloud service, a proprietary
+    in-house API, etc. Components can also take
+    advantage of RESTx and implement even complex data integration logic in just a few lines
+    of code.</p>
+
+    <p>Once these parameters are provided, RESTx stores them for later use and creates the
+    URL of a new resource. Once that URL is accessed, the parameters are loaded again and
+    applied to the component.</p>
+
+    <p>You can now return 
+       <span onmouseover="linkHighlight('Home');" onmouseout="stopLinkHighlight('Home');" class="lref">Home</span> and
+       see yourself how easy it is to create new RESTful web services and resources with RESTx.</p>
+    
+</td>
+<td valign=top>
+    <h3>Next:</h3>
+    <p>Please return to the server's home page by clicking the
+       <span onmouseover="linkHighlight('Home');" onmouseout="stopLinkHighlight('Home');" class="lref">Home</span> link.
+</td>
+</tr>
+</table>
+</body>
+<script>makeMenu();</script>
+
+</html>
+

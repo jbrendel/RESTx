@@ -1,0 +1,137 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/static/demo/styles.css">
+</head>
+<body>
+<script src="/static/demo/script.js" type="text/javascript"></script>
+
+<script>
+    function setup_handlers() {
+        disableLinks([ ]);
+        forceFieldValue("resource_creation_params__suggested_name", "YoungEmployees", "Resource name", false);
+        forceFieldValue("resource_creation_params__desc", "List of young employees", "Description", false);
+        forceEmptyFieldValue("params__columns");
+        forceEmptyFieldValue("params__where2");
+        forceFieldValue("params__where1", "Birth_Date>='1970-01-01'", "where1", false);
+    }
+
+    setup_handlers();
+</script>
+
+<div id="menu_div" style="width:100%;text-align:center;border-bottom:1px dashed #444444;">&nbsp;</div>
+
+<table cellspacing=10 cellpadding=10>
+<tr>
+<td id="content_cell" valign=top style="border-right:1px dashed #444444;">
+    <h3>Creating a resource from a specialized component</h3>
+
+    <p>We see that the form is much simpler now. In particular, all fields that
+    we specified for the specialized component are not shown to us anymore.</p>
+
+    <p>With these simplifications, it is now possible even for much less technical
+    users in the enterprise to create new resources.</p>
+
+    <h3>Setting the remaining parameters</h3>
+
+    <p><i>Note: For this demo, we can pre-fill the form fields for you, if you like. Just press: 
+       <button style="font-size:0.9em;cursor:hand;" onClick="preFillForm();">pre-fill form</button></i></p>
+
+    <p>Generic fields - such as name and description - are always present when creating a new
+    resouce.
+    Please enter "YoungEmployees" as
+    <span onmouseover="rowHighlight('Resource_name');" onmouseout="stopRowHighlight('Resource_name');" class="lref">resource name</span>.
+    For the
+    <span onmouseover="rowHighlight('Description');" onmouseout="stopRowHighlight('Description');" class="lref">description</span> please
+    enter "List of young employees".</p>
+
+    <p>Finally, let's restrict the output to those people that are younger than a certain age. For this,
+    please enter "Birth_Date&gt;='1970-01-01'" in the 
+    <span onmouseover="rowHighlight('where1');" onmouseout="stopRowHighlight('where1');" class="lref">where1</span> field.</p>
+
+    <p>When we click the
+    <span onmouseover="elemHighlight('submit_button');" onmouseout="stopElemHighlight('submit_button');" class="lref">submit button</span>, the
+    new resource, based on the specialized component will be created.</p>
+
+</td>
+<td id="next_cell" valign=top width=350>
+    <h3>Next:</h3>
+    <p>You can either let us pre-fill the form for you:
+    <ol>
+       <li><button style="font-size:0.9em;cursor:hand;" onClick="preFillForm();">pre-fill form</button></li>
+       <li>Now press the <span onmouseover="elemHighlight('submit_button');" onmouseout="stopElemHighlight('submit_button');" class="lref">submit button</span>.</li>
+    </ol>
+    <p>Or you can perform the steps yourself:
+    <ol>
+        <li>Enter &nbsp; <code>YoungEmployees</code> &nbsp; in the
+            <span onmouseover="rowHighlight('Resource_name');" onmouseout="stopRowHighlight('Resource_name');" class="lref">resource name</span> field.</li>
+        <li>Enter &nbsp; <code>List of young employees</code> &nbsp; in the
+            <span onmouseover="rowHighlight('Description');" onmouseout="stopRowHighlight('Description');" class="lref">description</span> field.</li>
+        <li>Enter &nbsp; <code>jdbc:mysql://localhost:3306/testdb?user=jbrendel&amp;password=my88erbahn</code> &nbsp; in the
+        <li>Enter &nbsp; <code>Birth_Date&gt;='1970-01-01'</code> &nbsp; in the
+            <span onmouseover="rowHighlight('where1');" onmouseout="stopRowHighlight('where1');" class="lref">where1</span> field.</li>
+        <li>Press the 
+            <span onmouseover="elemHighlight('submit_button');" onmouseout="stopElemHighlight('submit_button');" class="lref">submit button</span>.</li>
+    </ol>
+</td>
+</tr>
+</table>
+</body>
+<script>
+
+makeMenu();
+
+function preFillForm()
+{
+    var form = getElemById("resource_form");
+    form.resource_creation_params__suggested_name.value = "YoungEmployees";
+    form.resource_creation_params__desc.value = "List of young employees";
+    form.params__columns.value = "";
+    form.params__where1.value = "Birth_Date>='1970-01-01'";
+    form.params__where2.value = "";
+}
+
+var interval;
+// Check whether an element has appeared in the frame, which
+// lets us know that the resource creation has succeeded.
+// If that's the case, we are completely updating the content
+// of the top frame.
+function createdChecker()
+{
+    if (getLinkByUrl("/resource/YoungEmployees") != null) {
+        clearInterval(interval);
+        // The left cell with descriptions...
+        elem = document.getElementById("content_cell");
+        elem.innerHTML = " \
+    <h3>A new resource has been created, based on the specialized component</h3>  \
+    <p>Here you see the confirmation that the specialized component was  \
+    <span onmouseover=\"elemHighlight('status_value');\" onmouseout=\"stopElemHighlight('status_value');\" class=\"lref\">created successfully</span>.  \
+    You also receive the confirmation of the \
+    <span onmouseover=\"elemHighlight('name_value');\" onmouseout=\"stopElemHighlight('name_value');\" class=\"lref\">resource name</span>.</p>  \
+  \
+    <p>Lastly, you get the  \
+    <span onmouseover=\"linkHighlight('/resource/YoungEmployees');\" onmouseout=\"stopLinkHighlight('/resource/YoungEmployees');\" class=\"lref\">URI of the new resource</span>  \
+    you just created.</p>  \
+";
+        // The right cell with the next steps...
+        elem = document.getElementById("next_cell");
+        elem.innerHTML = " \
+    <h3>Next:</h3> \
+    <p>Click on the  \
+    <span onmouseover=\"linkHighlight('/resource/YoungEmployees');\" onmouseout=\"stopLinkHighlight('/resource/YoungEmployees');\" class=\"lref\">URI of the resource</span>. \
+";
+
+    }
+    else {
+        // Need to redo these settings here, since the frame is reloaded in case of
+        // problem during form submit. In that case, all those handlers get erased.
+        // Thus, I need to reapply them regularly.
+        setup_handlers();
+    }
+}
+
+interval = setInterval(createdChecker, 500);
+
+</script>
+
+</html>
+

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>RESTx Tester 1</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/restx/theme/combo.css" type="text/css">
+    <script src="/static/restx/scripts/jquery-1.4.2.min.js"></script>
+    <script src="/static/restx/scripts/restx_plugin.js"></script>
+    <script src="/static/restx/scripts/restx_js_client_example.js"></script>
+</head>
+<body>
+<h2>General services (individual calls)</h2>
+<h3><a href="restx_js_example_2.html">See RESTx advanced usage</a></h3>
+<ul>
+    <li>ProxyPath value:&nbsp;/<input type="text" id="proxypath" />/&nbsp;<button id="proxysetter">Apply</button> &nbsp (Enter a wrong value here to test the error handling)</li>
+    <li><a href="#" id="serverInfo">Show the info of this RESTx server</a></li>
+    <li><a href="#" id="components">Show all components available on this RESTx server (restx.getAllComponentNames)</a></li>
+    <li><a href="#" id="componentsPlus">Show all components available on this RESTx server (restx.getAllComponentNamesPlus(callback))</a></li>
+    <li><a href="#" id="specializedComponentPlus">Show all specialized components available on this RESTx server (restx.getAllComponentNamesPlus(callback, true))</a></li>
+    <li><a href="#" id="resource">Show all resources available on this RESTx server (restx.getAllResourceNames)</a></li>
+    <li><a href="#" id="resourcePlus">Show all resources available on this RESTx server (restx.getAllResourceNamesPlus)</a></li>
+    <li><a href="#" id="componentDetails">Show the details of the "Twitter component" on this RESTx server (restx.getComponentDetails)</a></li>
+    <li>Component name: <input type="text" value="" /><a href="#" id="showComponent">Show this component's details (restx.getComponentDetails(callback, name, false))</a></li>
+    <li>Specialized component name: <input type="text" value="" /><a href="#" id="showSpecializedComponent">Show this specialized component's details (restx.getComponentDetails(callback, name, true))</a></li>
+    <li>Resource name: <input type="text" value="" /><a href="#" id="showResource">Show this resource's details (restx.getResourceDetails)</a></li>
+    <li>Resource name: <input type="text" value="" />Service name: <input type="text" value="" /><a href="#" id="useResource">Use this service for this resource on this RESTx server (restx.callService)</a></li>
+</ul>
+<div id="result"></div>
+
+</body>
+</html>
