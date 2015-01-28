@@ -6,6 +6,10 @@ This is an open source project I worked on for a company a few years ago. The
 original repository has been taken down, so I created a new repository with a
 copy of the code. Unfortunately, the development history is now lost.
 
+Please see the old project home page with lots of information here:
+
+    https://web.archive.org/web/20130127154128/http://restx.mulesoft.org/
+
 Please see 'CONTRIBUTORS.txt' to see who helped.
 
 Please see 'INSTALL.txt' for installation instructions.
